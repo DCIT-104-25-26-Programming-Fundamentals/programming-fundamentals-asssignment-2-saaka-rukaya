@@ -73,3 +73,165 @@
 #include <cmath>
 using namespace std;
 
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+double add(double first_number, double second_number)
+{
+    return first_number + second_number;
+}
+
+double subtract(double first_number, double second_number)
+{
+    return first_number - second_number;
+}
+
+double multiply(double first_number, double second_number)
+{
+    return first_number * second_number;
+}
+
+double divide(double first_number, double second_number)
+{
+    return first_number / second_number;
+}
+
+int modulus(int first_number, int second_number)
+{
+    return first_number % second_number;
+}
+
+double exponentiate(double first_number, double second_number)
+{
+    return pow(first_number, second_number);
+}
+
+void displayMenu()
+{
+    cout << "\n============================" << endl;
+    cout << "     SIMPLE CALCULATOR" << endl;
+    cout << "============================" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+}
+
+int main()
+{
+    int menu_choice;
+    double first_number;
+    double second_number;
+    double result;
+
+    while (true)
+    {
+        displayMenu();
+
+        cout << "Select an operation (1-7): ";
+        cin >> menu_choice;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Error: Please enter a valid menu choice." << endl;
+            continue;
+        }
+
+        if (menu_choice == 7)
+        {
+            cout << "Goodbye!" << endl;
+            break;
+        }
+
+        if (menu_choice < 1 || menu_choice > 7)
+        {
+            cout << "Error: Please select a number from 1 to 7." << endl;
+            continue;
+        }
+
+        cout << "Enter first number : ";
+        cin >> first_number;
+
+        cout << "Enter second number: ";
+        cin >> second_number;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Error: Please enter valid numbers." << endl;
+            continue;
+        }
+
+        cout << fixed << setprecision(2);
+
+        if (menu_choice == 1)
+        {
+            result = add(first_number, second_number);
+
+            cout << "Result: " << first_number << " + "
+                 << second_number << " = " << result << endl;
+        }
+        else if (menu_choice == 2)
+        {
+            result = subtract(first_number, second_number);
+
+            cout << "Result: " << first_number << " - "
+                 << second_number << " = " << result << endl;
+        }
+        else if (menu_choice == 3)
+        {
+            result = multiply(first_number, second_number);
+
+            cout << "Result: " << first_number << " * "
+                 << second_number << " = " << result << endl;
+        }
+        else if (menu_choice == 4)
+        {
+            if (second_number == 0)
+            {
+                cout << "Error: Cannot divide by zero." << endl;
+            }
+            else
+            {
+                result = divide(first_number, second_number);
+
+                cout << "Result: " << first_number << " / "
+                     << second_number << " = " << result << endl;
+            }
+        }
+        else if (menu_choice == 5)
+        {
+            int first_integer = static_cast<int>(first_number);
+            int second_integer = static_cast<int>(second_number);
+
+            if (second_integer == 0)
+            {
+                cout << "Error: Cannot calculate modulus by zero." << endl;
+            }
+            else
+            {
+                int remainder = modulus(first_integer, second_integer);
+
+                cout << "Result: " << first_integer << " % "
+                     << second_integer << " = " << remainder << endl;
+            }
+        }
+        else if (menu_choice == 6)
+        {
+            result = exponentiate(first_number, second_number);
+
+            cout << "Result: " << first_number << " ^ "
+                 << second_number << " = " << result << endl;
+        }
+    }
+
+    return 0;
+}
