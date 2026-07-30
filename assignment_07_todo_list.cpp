@@ -79,4 +79,144 @@
 #include <vector>
 #include <string>
 using namespace std;
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
 
+void addTask(vector<string>& tasks)
+{
+    string task_description;
+
+    cout << "Enter task: ";
+    getline(cin, task_description);
+
+    if (task_description.empty())
+    {
+        cout << "Error: Task description cannot be empty." << endl;
+    }
+    else
+    {
+        tasks.push_back(task_description);
+        cout << "Task added: \"" << task_description << "\"" << endl;
+    }
+}
+
+
+void viewTasks(const vector<string>& tasks)
+{
+    if (tasks.empty())
+    {
+        cout << "Your to-do list is empty." << endl;
+        return;
+    }
+
+    cout << "\nYour Tasks:" << endl;
+
+    for (int task_index = 0; task_index < tasks.size(); task_index++)
+    {
+        cout << task_index + 1 << ". " << tasks[task_index] << endl;
+    }
+}
+
+
+void deleteTask(vector<string>& tasks)
+{
+    if (tasks.empty())
+    {
+        cout << "There are no tasks to delete." << endl;
+        return;
+    }
+
+    viewTasks(tasks);
+
+    int task_number;
+
+    cout << "Enter task number to delete: ";
+    cin >> task_number;
+
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Error: Please enter a valid task number." << endl;
+        return;
+    }
+
+    cin.ignore(1000, '\n');
+
+    if (task_number < 1 || task_number > tasks.size())
+    {
+        cout << "Error: Invalid task number." << endl;
+    }
+    else
+    {
+        string removed_task = tasks[task_number - 1];
+
+        tasks.erase(tasks.begin() + task_number - 1);
+
+        cout << "Task \"" << removed_task
+             << "\" has been removed." << endl;
+    }
+}
+
+
+void displayMenu()
+{
+    cout << "\n============================" << endl;
+    cout << "     TO-DO LIST MENU" << endl;
+    cout << "============================" << endl;
+    cout << "1. Add task" << endl;
+    cout << "2. View tasks" << endl;
+    cout << "3. Delete task" << endl;
+    cout << "4. Quit" << endl;
+}
+
+
+int main()
+{
+    vector<string> tasks;
+    int menu_choice;
+
+    while (true)
+    {
+        displayMenu();
+
+        cout << "Enter your choice (1-4): ";
+        cin >> menu_choice;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Error: Please enter a number from 1 to 4." << endl;
+            continue;
+        }
+
+        cin.ignore(1000, '\n');
+
+        if (menu_choice == 1)
+        {
+            addTask(tasks);
+        }
+        else if (menu_choice == 2)
+        {
+            viewTasks(tasks);
+        }
+        else if (menu_choice == 3)
+        {
+            deleteTask(tasks);
+        }
+        else if (menu_choice == 4)
+        {
+            cout << "Goodbye!" << endl;
+            break;
+        }
+        else
+        {
+            cout << "Error: Please enter a number from 1 to 4." << endl;
+        }
+    }
+
+    return 0;
+}
