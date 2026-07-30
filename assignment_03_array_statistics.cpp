@@ -40,5 +40,90 @@
 // =============================================================================
 
 #include <iostream>
+using namespace std
+
+#include <iostream>
 using namespace std;
 
+double calculateSum(double numbers[], int number_of_values)
+{
+    double total = 0;
+
+    for (int index = 0; index < number_of_values; index++)
+    {
+        total = total + numbers[index];
+    }
+
+    return total;
+}
+
+double calculateAverage(double numbers[], int number_of_values)
+{
+    double total = calculateSum(numbers, number_of_values);
+    return total / number_of_values;
+}
+
+double findMaximum(double numbers[], int number_of_values)
+{
+    double maximum_value = numbers[0];
+
+    for (int index = 1; index < number_of_values; index++)
+    {
+        if (numbers[index] > maximum_value)
+        {
+            maximum_value = numbers[index];
+        }
+    }
+
+    return maximum_value;
+}
+
+double findMinimum(double numbers[], int number_of_values)
+{
+    double minimum_value = numbers[0];
+
+    for (int index = 1; index < number_of_values; index++)
+    {
+        if (numbers[index] < minimum_value)
+        {
+            minimum_value = numbers[index];
+        }
+    }
+
+    return minimum_value;
+}
+
+int main()
+{
+    int number_of_values;
+
+    cout << "How many numbers? ";
+    cin >> number_of_values;
+
+    if (number_of_values <= 0)
+    {
+        cout << "Error: Number of values must be a positive integer." << endl;
+        return 0;
+    }
+
+    double numbers[number_of_values];
+
+    for (int index = 0; index < number_of_values; index++)
+    {
+        cout << "Enter number " << index + 1 << ": ";
+        cin >> numbers[index];
+    }
+
+    double total = calculateSum(numbers, number_of_values);
+    double average = calculateAverage(numbers, number_of_values);
+    double maximum_value = findMaximum(numbers, number_of_values);
+    double minimum_value = findMinimum(numbers, number_of_values);
+
+    cout << "\nResults:" << endl;
+    cout << "Sum:     " << total << endl;
+    cout << "Average: " << average << endl;
+    cout << "Maximum: " << maximum_value << endl;
+    cout << "Minimum: " << minimum_value << endl;
+
+    return 0;
+}

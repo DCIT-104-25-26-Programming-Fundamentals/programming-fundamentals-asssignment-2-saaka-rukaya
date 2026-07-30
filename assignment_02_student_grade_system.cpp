@@ -46,9 +46,6 @@
 #include <iostream>
 using namespace std;
 
-#include <iostream>
-using namespace std;
-
 char getGrade(int student_score)
 {
     if (student_score < 0 || student_score > 100)
